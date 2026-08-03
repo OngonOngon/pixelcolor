@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6d5dfc">
+  <meta name="description" content="Kostková linka – klidná barevná logická hra bez reklam, životů a mikrotransakcí.">
+  <title>Kostková linka</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">BEZ REKLAM · OFFLINE</p>
+        <h1>Kostková linka</h1>
+      </div>
+      <div class="top-actions">
+        <button id="installButton" class="icon-button hidden" type="button" aria-label="Nainstalovat aplikaci" title="Nainstalovat aplikaci">＋</button>
+        <button id="soundButton" class="icon-button" type="button" aria-label="Vypnout zvuk" title="Zvuk">♪</button>
+        <button id="helpButton" class="icon-button" type="button" aria-label="Nápověda" title="Nápověda">?</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="status-row" aria-label="Stav hry">
+        <div class="status-card">
+          <span>Úroveň</span>
+          <strong id="levelLabel">1</strong>
+        </div>
+        <div class="status-card">
+          <span>Tahy</span>
+          <strong id="movesLabel">0</strong>
+        </div>
+        <div class="status-card">
+          <span>Nejlépe</span>
+          <strong id="bestLabel">–</strong>
+        </div>
+      </section>
+
+      <section class="game-card board-card" aria-labelledby="boardHeading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">HERNÍ POLE</p>
+            <h2 id="boardHeading">Vyber horní kostku</h2>
+          </div>
+          <span id="remainingLabel" class="soft-pill">0 kostek</span>
+        </div>
+        <div id="board" class="board" aria-live="polite"></div>
+      </section>
+
+      <section class="game-card" aria-labelledby="cratesHeading">
+        <div class="section-heading compact">
+          <div>
+            <p class="section-kicker">CÍLE</p>
+            <h2 id="cratesHeading">Aktivní bedny</h2>
+          </div>
+          <span id="queueLabel" class="soft-pill">0 čeká</span>
+        </div>
+        <div id="crates" class="crates" aria-live="polite"></div>
+      </section>
+
+      <section class="game-card conveyor-card" aria-labelledby="conveyorHeading">
+        <div class="section-heading compact">
+          <div>
+            <p class="section-kicker">ZÁSOBNÍK</p>
+            <h2 id="conveyorHeading">Dopravní pás</h2>
+          </div>
+          <span id="bufferLabel" class="soft-pill">0 / 7</span>
+        </div>
+        <div id="conveyor" class="conveyor" aria-live="polite"></div>
+        <p class="microcopy">Kostka bez aktivní bedny počká na pásu. Když se pás zaplní, musíš uvolnit vhodnou barvu.</p>
+      </section>
+
+      <section class="controls" aria-label="Ovládání hry">
+        <button id="undoButton" class="control-button secondary" type="button">↶ Vrátit tah</button>
+        <button id="hintButton" class="control-button secondary" type="button">✦ Nápověda</button>
+        <button id="restartButton" class="control-button danger" type="button">↻ Restart</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>Postup se ukládá jen v tomto zařízení.</p>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="messageDialog" class="modal">
+    <div class="modal-content">
+      <div id="modalIcon" class="modal-icon">◆</div>
+      <p id="modalKicker" class="section-kicker">KOSTKOVÁ LINKA</p>
+      <h2 id="modalTitle">Jak hrát</h2>
+      <div id="modalText" class="modal-text"></div>
+      <div id="modalActions" class="modal-actions"></div>
+    </div>
+  </dialog>
+
+  <script src="game.js" defer></script>
+</body>
+</html>
